@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_bulanan_document">
+    <t t-call="report.html_container">
+        
+        <t t-call="report.external_layout">
+            <div class="page">
+                <h2>Report title</h2>
+            
+                <t t-foreach="docs" t-as="o">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th><span t-field="o.name"/></th>
+                                <th class="text-right">mechanic</th>
+                                <th class="text-right">Quantity</th>
+                                <th class="text-right">Unit Price</th>
+                                <th class="text-right">Price</th>
+                            </tr>
+                       </thead>
+                       <tbody class="sale_tbody">
+                            <tr t-foreach="o.order_line" t-as="l">
+                                <td >
+                                   <span t-field="l.name"/>
+                                </td>
+                                <td class="text-right" width="100px">
+                                   <span t-field="l.mechanic"/>
+                                </td>
+                                <td class="text-right" width="100px">
+                                    <span t-field="l.product_uom_qty"/>
+                                    <span groups="product.group_uom" t-field="l.product_uom"/>
+                                </td>
+                                <td class="text-right" width="120px">
+                                    <span t-field="l.price_unit"
+                                        t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                                </td>
+                                <td class="text-right" width="120px">
+                                    <span t-field="l.price_subtotal"
+                                        t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+
+                            <table class="table table-condensed">
+                                <tr class="border-black">
+                                    <td ></td>
+                                    <td width="100px"></td>
+                                    <td class="text-right" width="120px"><strong>Total</strong></td>
+                                    <td class="text-right" width="120px">
+                                        <span t-field="o.amount_total"
+                                            t-field-options='{"widget": "monetary", "display_currency": "o.pricelist_id.currency_id"}'/>
+                                    </td>
+                                </tr>
+                            </table>
+                </t>
+            </div>
+        </t>
+       
+    </t>
+</template>
+
+<template id="report_bulanan">
+    <t t-call="report.html_container">
+        <!--<t t-foreach="doc_ids" t-as="doc_id">-->
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'ad_sales_bengkel.report_bulanan_document')"/>
+        <!--</t>-->
+    </t>
+</template>
+</data>
+</openerp>

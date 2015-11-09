@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<t t-name="report.external_layout_footer">
+    <div class="footer">
+    </div>      
+</t>

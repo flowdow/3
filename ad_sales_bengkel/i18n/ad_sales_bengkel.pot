@@ -1,0 +1,501 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* ad_sales_bengkel
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20150508\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-12 11:32+0000\n"
+"PO-Revision-Date: 2015-05-12 11:32+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ad_sales_bengkel
+#: model:ir.actions.act_window,help:ad_sales_bengkel.action_nopol
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                    Click to Create untuk memasukkan data baru\n"
+"                </p><p>\n"
+"                   ini adalah data no polisi pelanggan\n"
+"                </p>\n"
+"            "
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.actions.act_window,help:ad_sales_bengkel.action_order_line_detail_sale_tree
+msgid "<p>\n"
+"                Here is a list of each sales order line to be invoiced. You can\n"
+"                invoice sales orders partially, by lines of sales order. You do\n"
+"                not need this list if you invoice from the delivery orders or\n"
+"                if you invoice sales totally.\n"
+"              </p>\n"
+"            "
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+#: field:sale.order.line,admin_id:0
+msgid "Admin"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_order_line_admin_tree
+msgid "Admin List"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order.line:ad_sales_bengkel.view_order_line_admin_detail_tree
+msgid "Admin List Detail"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_form
+msgid "Buat Invoice"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_mechanic_line_filter
+msgid "Bulan Ini"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_filter
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_mechanic_line_filter
+msgid "Bulan Lalu"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+msgid "Bulan Lalu (Mutasi)"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_filter
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+msgid "Bulan Lalu (Tanpa Mutasi)"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_form
+msgid "Create Invoice"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:no.polisi,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:no.polisi,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+msgid "Customer"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.actions.act_window,name:ad_sales_bengkel.action_nopol
+#: model:ir.ui.menu,name:ad_sales_bengkel.menu_nopol
+msgid "Customer NoPol"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:sale.order,picking_type_id:0
+msgid "Deliver To"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+msgid "Done"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: code:addons/ad_sales_bengkel/sale.py:97
+#: code:addons/ad_sales_bengkel/sale.py:184
+#, python-format
+msgid "Error!"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+msgid "Group By"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:no.polisi,id:0
+msgid "ID"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:no.polisi,kilometer:0
+#: field:sale.order,kilometer:0
+msgid "Kilometer"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_form
+msgid "Kirim Barang"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.actions.act_window,name:ad_sales_bengkel.action_order_line_mechanic_tree
+#: model:ir.ui.menu,name:ad_sales_bengkel.menu_mechanic_view
+msgid "Laporan Mekanik"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.actions.act_window,name:ad_sales_bengkel.action_order_line_sale_tree
+#: model:ir.ui.menu,name:ad_sales_bengkel.menu_sales_view
+msgid "Laporan Penjualan"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.actions.act_window,name:ad_sales_bengkel.action_order_line_detail_sale_tree
+#: model:ir.ui.menu,name:ad_sales_bengkel.menu_sales_detail_view
+msgid "Laporan Penjualan Detail"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.actions.act_window,name:ad_sales_bengkel.action_order_line_admin_tree
+#: model:ir.ui.menu,name:ad_sales_bengkel.menu_admin_view
+msgid "Laporan Sales Admin"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.actions.act_window,name:ad_sales_bengkel.action_order_line_admin_detail_tree
+#: model:ir.ui.menu,name:ad_sales_bengkel.menu_admin_detail_view
+msgid "Laporan Sales Admin Detail"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:no.polisi,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:no.polisi,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_mechanic_line_filter
+#: field:sale.order.line,mechanic:0
+msgid "Mechanic"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+msgid "Mutasi Bulan Ini"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+msgid "Mutasi Bulan Lalu"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:no.polisi,merek:0
+#: field:sale.order,merek:0
+msgid "Nama Kendaraan"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+msgid "New Mail"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.model,name:ad_sales_bengkel.model_no_polisi
+msgid "No Polisi"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:sale.order,nowo:0
+msgid "No Workorder"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:no.polisi,name:0
+msgid "No. Polisi"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:sale.order,nopol:0
+msgid "Nomor Polisi"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:no.polisi:ad_sales_bengkel.view_nopol_graph
+msgid "Nopol"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+msgid "Order Month"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_order_line_admin_tree
+#: view:sale.order:ad_sales_bengkel.view_order_line_sale_tree_1
+msgid "Order Number"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:sale.report,order_reference:0
+msgid "Order Reference"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:no.polisi:ad_sales_bengkel.view_nopol_filter
+#: field:no.polisi,partner_id:0
+msgid "Pemilik"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: code:addons/ad_sales_bengkel/sale.py:451
+#, python-format
+msgid "Peringatan!"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: code:addons/ad_sales_bengkel/sale.py:98
+#, python-format
+msgid "Please define sales journal for this company: \"%s\" (id:%d)."
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:website:ad_sales_bengkel.report_bulanan_document
+msgid "Price"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_mechanic_line_filter
+msgid "Product"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order.line:ad_sales_bengkel.view_order_line_admin_detail_tree
+#: view:sale.order.line:ad_sales_bengkel.view_order_line_sale_detail_tree
+msgid "Qty"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:website:ad_sales_bengkel.report_bulanan_document
+msgid "Quantity"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: code:addons/ad_sales_bengkel/sale.py:84
+#, python-format
+msgid "Quotation created"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+msgid "Quotations"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.actions.report.xml,name:ad_sales_bengkel.as_sales_bengkel_report_bulanan
+msgid "Report Penjualan Bulanan"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:website:ad_sales_bengkel.report_bulanan_document
+msgid "Report title"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: field:sale.order,admin:0
+msgid "Sales"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.filters,name:ad_sales_bengkel.filter_sale_report_sales_bulan_ini_mutasi
+#: view:sale.order:ad_sales_bengkel.view_penjualan_filter
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+msgid "Sales Bulan Ini (Mutasi)"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.filters,name:ad_sales_bengkel.filter_sale_report_sales_bulan_ini_tanpa_mutasi
+#: view:sale.order:ad_sales_bengkel.view_penjualan_filter
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+msgid "Sales Bulan Ini (Tanpa Mutasi)"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.filters,name:ad_sales_bengkel.filter_sale_report_sales_bulan_lalu_mutasi
+msgid "Sales Bulan Lalu (Mutasi)"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.filters,name:ad_sales_bengkel.filter_sale_report_sales_bulan_lalu_tanpa_mutasi
+msgid "Sales Bulan Lalu (Tanpa Mutasi)"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.filters,name:ad_sales_bengkel.filter_sale_report_sales_kasir
+msgid "Sales Kasir"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.filters,name:ad_sales_bengkel.filter_sale_report_sales_mekanik
+msgid "Sales Mekanik"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.model,name:ad_sales_bengkel.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.model,name:ad_sales_bengkel.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order.line:ad_sales_bengkel.view_order_line_sale_detail_tree
+msgid "Sales Order Lines"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+msgid "Sales Order done"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+msgid "Sales Order ready to be invoiced"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+msgid "Sales Order that haven't yet been confirmed"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_order_line_sale_tree_1
+msgid "Sales Orders"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: model:ir.model,name:ad_sales_bengkel.model_sale_report
+msgid "Sales Orders Statistics"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+msgid "Search Sales"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order.line:ad_sales_bengkel.view_sales_order_sales_line_filter
+msgid "Search Sales Lines"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_form
+msgid "Set to Draft"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_form
+msgid "Setuju"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: code:addons/ad_sales_bengkel/sale.py:452
+#, python-format
+msgid "Stock Barang ini tidak mencukupi : \"%s\" (id:%d)."
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: help:sale.order,picking_type_id:0
+msgid "This will determine picking type of Delivery Order"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_sales_order_sales_filter
+msgid "To Invoice"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order.line:ad_sales_bengkel.view_order_line_admin_detail_tree
+#: view:sale.order.line:ad_sales_bengkel.view_order_line_sale_detail_tree
+#: view:website:ad_sales_bengkel.report_bulanan_document
+msgid "Total"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_order_line_admin_tree
+#: view:sale.order:ad_sales_bengkel.view_order_line_sale_tree_1
+msgid "Total Tax Included"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:website:ad_sales_bengkel.report_bulanan_document
+msgid "Unit Price"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order.line:ad_sales_bengkel.view_order_line_admin_detail_tree
+#: view:sale.order.line:ad_sales_bengkel.view_order_line_sale_detail_tree
+msgid "Unit of Measure"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: code:addons/ad_sales_bengkel/sale.py:185
+#, python-format
+msgid "You cannot group sales having different currencies for the same partner."
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:sale.report,admin:0
+msgid "admin"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_form
+msgid "approved,goods_sent"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_form
+msgid "draft,approved,good_sent,done"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_form
+msgid "good_sent"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: field:sale.report,mechanic:0
+#: view:website:ad_sales_bengkel.report_bulanan_document
+msgid "mechanic"
+msgstr ""
+
+#. module: ad_sales_bengkel
+#: view:sale.order:ad_sales_bengkel.view_penjualan_form
+msgid "statusbar"
+msgstr ""
+

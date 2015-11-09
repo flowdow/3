@@ -1,0 +1,736 @@
+<openerp>
+    <data>
+            
+            
+        <record id="view_penjualan_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="domain">[]</field>
+            <field name="arch" type="xml">
+            
+                <field name="partner_id" position="after">
+                    <field name="nowo"  required="1"/>
+                    <field name="admin" required="1" />
+                    <!-- <field name="nopol" required="1" on_change="onchange_nopol(nopol)"/> -->
+                    <!-- <field name="kilometer" /> -->
+                    <!-- <field name="merek" /> -->
+                </field>
+
+                <field name="partner_id" position="after">
+                    <field name="cara_pembayaran" />
+                </field>
+                
+                <button name="action_quotation_send" position="replace" />
+                <button name="invoice_recreate"  position="replace" />
+                <button name="print_quotation" position="after">
+                    <button name="action_approve" type="object" string="Setuju" states="draft" />
+                    <button name="action_picking_create" type="object" string="Kirim Barang" states="approved" />
+                    
+                    <button name="action_buat_invoice" type="object" string="Buat Invoice" states="goods_sent" /> 
+            
+                    <button name="action_set_to_draft" type="object" string="Set to Draft" states="cancel" />
+                </button>        
+                <button name="print_quotation" position="replace" />
+                <button name="action_button_confirm" position="replace" />
+                <button name="copy_quotation" position="replace" />
+                
+                <button string="Create Invoice" position="replace" />
+                
+                <button name="cancel" position="replace" />
+                
+                <button name="action_cancel" position="attributes" >
+            <!-- 
+                    <attribute name="states">approved,goods_sent</attribute>
+            -->
+                    <attribute name="states">approved</attribute>
+                </button>
+
+                <button name="action_view_invoice" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </button>
+
+            <!-- 
+                <button name="invoice_cancel" position="attributes" >
+                    <attribute name="states">good_sent</attribute>
+                </button>
+            -->
+                
+                <field name="state" position="attributes">
+                    <attribute name="widget" >statusbar</attribute>
+                    <attribute name="statusbar_visible">draft,approved,good_sent,done</attribute>
+                </field>
+           
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                    <field name="mechanic"/>
+                </xpath>
+                    
+            </field>
+        </record>
+        
+
+        
+        <record id="view_penjualan_filter" model="ir.ui.view">
+            <field name="name">sale.order.list.select</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter" />
+            <field name="arch" type="xml">
+                
+                <filter name="sales" position="after">
+                    <filter string="Sales Bulan Ini (Mutasi)" name="current_month" domain="[('date_order','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('date_order','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+
+                    <filter string="Sales Bulan Ini (Tanpa Mutasi)" name="current_month_no_mutasi" 
+                        domain="['&amp;', ('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), '&amp;', ('create_date','&gt;=',time.strftime('%%Y-%%m-01')), ('amount_total','&gt;',0)]"/>
+
+                    <filter string="Bulan Lalu" name="prev_month" domain="[('date_order','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),('date_order','&lt;',time.strftime('%%Y-%%m-01'))]"/>
+
+
+                    <filter string="Bulan Lalu (Tanpa Mutasi)" name="prev_month_no_mutasi" domain="['&amp;', ('create_date','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),'&amp;', ('create_date','&lt;',time.strftime('%%Y-%%m-01')), ('amount_total','&gt;',0)]"/>
+                    
+
+                </filter>
+
+                <filter name="my_sale_orders_filter" position="replace"/>
+                <filter name="sales" position="replace"/>
+                <filter name="draft" position="replace"/>
+                <filter name="message_unread" position="replace"/>
+
+                
+            </field>
+        </record>
+        
+
+
+        
+        <record model="ir.ui.menu" id="sale.menu_sale_quotations" >
+                <field name="name">Draft Penjualan</field>        
+        </record>
+
+        <record model="ir.ui.menu" id="sale.menu_sale_order" >
+                <field name="name">Penjualan</field>        
+        </record>
+        
+
+        <record model="ir.actions.act_window" id="sale.action_quotations" >
+                <field name="name">Draft Penjualan</field>        
+        </record>
+
+        <record model="ir.actions.act_window" id="sale.action_orders" >
+                <field name="name">Penjualan</field>        
+        </record>
+
+
+        
+        <menuitem id="menu_sales_management_customers_top" name="Customers"
+          parent="base.menu_base_partner" sequence="8"/>
+
+
+        <menuitem id="base.menu_partner_form" 
+        parent="menu_sales_management_customers_top"
+        action="base.action_partner_form" sequence="15"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <record id="view_order_line_sale_tree_1" model="ir.ui.view">
+            <field name="name">sale.order.line.sale.tree.1</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree string="Sales Orders" >
+                    <field name="message_unread" invisible="1"/>
+                    <field name="name" string="Order Number"/>
+                    <field name="date_order"/>
+                    <field name="partner_id"/>
+                    <field name="admin"/>
+                    <field name="amount_total" sum="Total Tax Included"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+
+
+        <record id="view_sales_order_sales_filter" model="ir.ui.view">
+            <field name="name">sale.order.list.sale.select</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <search string="Search Sales">
+                    <filter string="Sales Bulan Ini (Mutasi)" name="current_month" 
+                        domain="[('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('create_date','&gt;=',time.strftime('%%Y-%%m-01')), ('state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Sales Bulan Ini (Tanpa Mutasi)" name="current_month_no_mutasi" 
+                        domain="['&amp;', ('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), '&amp;', ('create_date','&gt;=',time.strftime('%%Y-%%m-01')), ('amount_total','&gt;',0) , ('state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Mutasi Bulan Ini" name="current_month_mutasi" 
+                        domain="['&amp;', ('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), '&amp;', ('create_date','&gt;=',time.strftime('%%Y-%%m-01')), ('amount_total','=',0) , ('state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Bulan Lalu (Mutasi)" name="prev_month" domain="[('create_date','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),('create_date','&lt;',time.strftime('%%Y-%%m-01')) , ('state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Bulan Lalu (Tanpa Mutasi)" name="prev_month_no_mutasi" domain="['&amp;', ('create_date','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),'&amp;', ('create_date','&lt;',time.strftime('%%Y-%%m-01')), ('amount_total','&gt;',0) , ('state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Mutasi Bulan Lalu" name="prev_month_mutasi" domain="['&amp;', ('create_date','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),'&amp;', ('create_date','&lt;',time.strftime('%%Y-%%m-01')), ('amount_total','=',0) , ('state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Bulan Lalu" name="prev_month" domain="[('date_order','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),('date_order','&lt;',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter string="Quotations" name="draft" domain="[('state','in',('draft','sent'))]" help="Sales Order that haven't yet been confirmed"/>
+                    <filter string="Sales" name="sales" domain="[('state','in',('manual','progress'))]"/>
+                    <filter string="To Invoice" domain="[('state','=','manual')]" help="Sales Order ready to be invoiced"/>
+                    <filter string="Done" domain="[('state','=','done')]" help="Sales Order done"/>
+                    <separator/>
+                    <filter string="New Mail" name="message_unread" domain="[('message_unread','=',True)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Admin" domain="[]" context="{'group_by':'admin'}"/>
+                        <filter string="Customer" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Order Month" domain="[]" context="{'group_by':'date_order'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+
+        <record id="action_order_line_sale_tree" model="ir.actions.act_window">
+            <field name="name">Laporan Penjualan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="filter" eval="True"/>
+            <field name="view_id" ref="view_order_line_sale_tree_1"/>
+            <field name="search_view_id" ref="view_sales_order_sales_filter"/>
+            <field name="context">{
+                    'search_default_current_month': 1
+                }
+            </field>
+        </record>
+        
+        <menuitem action="action_order_line_sale_tree" id="menu_sales_view" parent="base.next_id_64" sequence="10" groups="base.group_sale_salesman,base.group_sale_manager"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <record id="view_order_line_sale_detail_tree" model="ir.ui.view">
+            <field name="name">sale.order.line.sale.detail.tree</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="Sales Order Lines" create="false">
+                    <field name="order_id"/>
+                    <field name="create_date"/>
+                    <field name="product_id"/>
+                    <field name="admin_id"/>
+                    <field name="product_uom_qty" string="Qty"/>
+                    <field name="product_uom" string="Unit of Measure" groups="product.group_uom"/>
+                    <field name="price_unit"/>
+                    <field name="discount"/>
+                    <field name="price_subtotal" sum="Total"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+
+        <record id="view_sales_order_sales_line_filter" model="ir.ui.view">
+            <field name="name">sale.order.list.sale.line.select</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <search string="Search Sales Lines">
+                    <filter string="Sales Bulan Ini (Mutasi)" name="current_month" 
+                        domain="[('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('create_date','&gt;=',time.strftime('%%Y-%%m-01')), ('order_id.state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Sales Bulan Ini (Tanpa Mutasi)" name="current_month_no_mutasi" 
+                        domain="['&amp;', ('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), '&amp;', ('create_date','&gt;=',time.strftime('%%Y-%%m-01')), ('order_id.amount_total','&gt;',0), ('order_id.state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Mutasi Bulan Ini" name="current_month_mutasi" 
+                        domain="['&amp;', ('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), '&amp;', ('create_date','&gt;=',time.strftime('%%Y-%%m-01')), ('order_id.amount_total','=',0), ('order_id.state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Bulan Lalu (Mutasi)" name="prev_month" domain="[('create_date','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),('create_date','&lt;',time.strftime('%%Y-%%m-01')), ('order_id.state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Bulan Lalu (Tanpa Mutasi)" name="prev_month_no_mutasi" domain="['&amp;', ('create_date','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),'&amp;', ('create_date','&lt;',time.strftime('%%Y-%%m-01')), ('order_id.amount_total','&gt;',0), ('order_id.state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Mutasi Bulan Lalu" name="prev_month_mutasi" domain="['&amp;', ('create_date','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),'&amp;', ('create_date','&lt;',time.strftime('%%Y-%%m-01')), ('order_id.amount_total','=',0), ('order_id.state','not in',('draft','cancel'))]"/>
+
+                    <group expand="0" string="Group By">
+                        <filter string="Admin" domain="[]" context="{'group_by':'admin_id'}"/>
+                        <filter string="Customer" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Order Month" domain="[]" context="{'group_by':'date_order'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+
+
+        
+        <record id="action_order_line_detail_sale_tree" model="ir.actions.act_window">
+            <field name="name">Laporan Penjualan Detail</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="filter" eval="True"/>
+            <field name="search_view_id" ref="view_sales_order_sales_line_filter"/>
+            <field name="context">{
+                    'search_default_current_month': 1
+                }
+            </field>
+            <field name="help" type="html">
+              <p>
+                Here is a list of each sales order line to be invoiced. You can
+                invoice sales orders partially, by lines of sales order. You do
+                not need this list if you invoice from the delivery orders or
+                if you invoice sales totally.
+              </p>
+            </field>
+        </record>
+
+
+        
+        <menuitem action="action_order_line_detail_sale_tree" id="menu_sales_detail_view" parent="base.next_id_64" sequence="11" groups="base.group_sale_salesman,base.group_sale_manager"/>
+
+
+
+
+
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+        
+        
+        <record id="view_order_line_admin_tree" model="ir.ui.view">
+            <field name="name">sale.order.line.admin.tree</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree string="Admin List" fonts="bold:message_unread==True" colors="grey:state=='cancel';blue:state in ('waiting_date','manual');red:state in ('invoice_except','shipping_except')">
+                    <field name="message_unread" invisible="1"/>
+                    <field name="name" string="Order Number"/>
+                    <field name="date_order"/>
+                    <field name="admin"/>
+                    <field name="partner_id"/>
+                    <field name="amount_total" sum="Total Tax Included"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+
+
+
+        
+        <record id="action_order_line_admin_tree" model="ir.actions.act_window">
+            <field name="name">Laporan Sales Admin</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_order_line_admin_tree"/>
+            <field name="filter" eval="True"/>
+            <field name="context">{
+                    'search_default_current_month': 1
+                }
+            </field>
+        </record>
+
+
+        
+        <menuitem action="action_order_line_admin_tree" id="menu_admin_view" parent="base.next_id_64" sequence="13" groups="base.group_sale_salesman,base.group_sale_manager"/>
+
+
+
+        
+        
+        
+
+
+
+        
+        
+        
+        
+        
+
+
+
+
+
+
+
+
+
+        <record id="view_order_line_admin_detail_tree" model="ir.ui.view">
+            <field name="name">sale.order.line.admin.detail.tree</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="Admin List Detail" create="false">
+                   <field name="order_id"/>
+                    <field name="create_date"/>
+                    <field name="product_id"/>
+                    <field name="admin_id"/>
+                    <field name="product_uom_qty" string="Qty"/>
+                    <field name="price_unit"/>
+                    <field name="discount"/>
+                    <field name="product_uom" string="Unit of Measure" groups="product.group_uom"/>
+                    <field name="price_subtotal" sum="Total"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+        
+
+
+
+        
+        <record id="action_order_line_admin_detail_tree" model="ir.actions.act_window">
+            <field name="name">Laporan Sales Admin Detail</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_order_line_admin_detail_tree"/>
+            <field name="search_view_id" ref="view_sales_order_sales_line_filter"/>
+            <field name="filter" eval="True"/>
+            <field name="context">{
+                    'search_default_current_month': 1
+                }
+            </field>
+        </record>
+
+
+        
+        <menuitem action="action_order_line_admin_detail_tree" id="menu_admin_detail_view" parent="base.next_id_64" sequence="14" groups="base.group_sale_salesman,base.group_sale_manager"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <record id="view_order_line_mechanic_tree" model="ir.ui.view">
+            <field name="name">sale.order.line.mechanic.tree</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_order_line_tree" />
+            <field name="arch" type="xml">
+                <field name="product_id" position="replace"/>
+                <field name="order_id" position="after" >
+                    <field name="mechanic" />
+                    <field name="product_id" />
+                </field>
+                <field name="product_id" position="attributes" >
+                    <attribute name="invisible">0</attribute>
+                </field>
+
+                <field name="salesman_id" position="after" >
+                    <field name="admin_id" />
+                    <field name="price_unit" />
+                    <field name="discount"/>
+                </field>
+                
+
+                <field name="salesman_id" position="replace"/>
+                <field name="invoiced" position="replace"/>
+                <field name="name" position="replace"/>
+            </field>
+        </record>
+        
+        
+        <record id="view_sales_order_mechanic_line_filter" model="ir.ui.view">
+            <field name="name">sale.order.line.select</field>
+            <field name="model">sale.order.line</field>
+            <field name="inherit_id" ref="sale.view_sales_order_line_filter" />
+            <field name="arch" type="xml">
+                <filter string="Product" position="after">
+                    <filter string="Mechanic" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'mechanic'}"/>
+                    <filter string="Bulan Ini" name="current_month" domain="[('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')), ('create_date','&gt;=',time.strftime('%%Y-%%m-01')), ('order_id.state','not in',('draft','cancel'))]"/>
+
+                    <filter string="Bulan Lalu" name="prev_month" domain="[('create_date','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),('create_date','&lt;',time.strftime('%%Y-%%m-01')), ('order_id.state','not in',('draft','cancel'))]"/>
+                </filter>
+            </field>
+        </record>
+        
+        <record id="action_order_line_mechanic_tree" model="ir.actions.act_window">
+            <field name="context">{}</field>
+            <field name="name">Laporan Mekanik</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_id" ref="view_order_line_mechanic_tree"/>
+            <field name="search_view_id" ref="view_sales_order_mechanic_line_filter"/>
+            <field name="context">{
+                    'search_default_current_month': 1
+                }
+            </field>
+        </record>
+        
+        <menuitem action="action_order_line_mechanic_tree" id="menu_mechanic_view" parent="base.next_id_64" sequence="12" groups="base.group_sale_salesman,base.group_sale_manager"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+        
+        <record id="view_nopol_graph" model="ir.ui.view" >
+            <field name="name">Nomor Polisi Customer</field>
+            <field name="model">no.polisi</field>
+            <field name="arch" type="xml">
+                <graph string="Nopol" type="pivot">
+                    <field name="name" type="row"/>
+                    <field name="kilometer" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        
+        <record id="view_nopol_tree" model="ir.ui.view">
+            <field name="name">Nomor Polisi Customer</field>
+            <field name="model">no.polisi</field>
+            <field name="arch" type="xml">
+                    <tree>
+                        <field name="name" />
+                        <field name="kilometer" />
+                        <field name="partner_id" />
+                        <field name="merek" />
+                    </tree>
+            </field>
+        </record>
+        
+        <record id="view_nopol_form" model="ir.ui.view">
+            <field name="name">Nomor Polisi Customer</field>
+            <field name="model">no.polisi</field>
+            <field name="arch" type="xml">
+                    <form>
+                        <field name="name" required="1"/>
+                        <field name="kilometer" />
+                        <field name="partner_id" />
+                        <field name="merek" />
+                    </form>
+            </field>
+        </record>
+        
+        
+        <record id="view_nopol_filter" model="ir.ui.view">
+            <field name="name">Nomor Polisi Customer</field>
+            <field name="model">no.polisi</field>
+            <field name="arch" type="xml">
+                    <search>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <filter string="Pemilik" domain="[]" context="{'group_by':'partner_id'}"/>
+                    </search>
+            </field>
+        </record>
+        
+        
+        <record id="action_nopol" model="ir.actions.act_window">
+            <field name="name">Nomor Polisi Customer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">no.polisi</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="search_view_id" ref="view_nopol_filter"/>
+            <field name="context">{
+                }
+            </field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to Create untuk memasukkan data baru
+                </p><p>
+                   ini adalah data no polisi pelanggan
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="action_nopol" id="menu_nopol" parent="base.menu_sales" sequence="9" groups="base.group_sale_salesman,base.group_sale_manager"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+        
+        <menuitem action="sale.action_orders" id="menu_nandha"  name="Report" sequence="50" groups="base.group_sale_salesman,base.group_sale_manager" parent="base.menu_base_partner"/>
+
+-->
+
+
+    </data>
+</openerp>

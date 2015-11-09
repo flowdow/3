@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="sale.report_saleorder_document">
+    <t t-call="report.external_layout">
+        <div class="page">
+            <div class="oe_structure"/>
+
+            <table class="table border-black table-condensed" style="border-bottom: 1px solid black; font-size:10px; padding:0; margin:0">
+                <tr>
+                    <td >No 
+                        Invoice <br/>
+                        Tanggal <br/>
+                        No Polisi <br/>
+                        Nama Kendaraan <br/>
+                        Customer <br/>
+                    </td>
+                    <td class="text-left">
+                        : <span t-field="o.name"/><br/>
+                        : <span t-field="o.date_order" t-field-options='{"format": "d/MM/y"}'/><br/>
+                        : <span t-field="o.nopol.name"/><br/>
+                        : <span t-field="o.merek"/><br/>
+                        : <span t-field="o.partner_id.name"/>
+                    </td>
+                    <td>             
+                        Cara Bayar <br/>
+                        Cust Service <br/>
+                        Keterangan <br/>
+                    </td>
+                    <td class="text-left" width="200px">
+                        : <span t-if="not o.payment_term" >
+                            Tunai <span t-field="o.payment_term"/> 
+                          </span>
+                          <span t-if="o.payment_term" >
+                            Cicilan
+                          </span><br/>
+                        : <span t-field="o.admin.name"/><br/>
+                        : <span style="font-size:5px" t-field="o.client_order_ref"/>
+                    </td>
+                </tr>
+                <tr class="border-black" style="border-bottom: 1px solid black;">
+                </tr>
+            </table>   
+
+            
+            <table class="table table-condensed" style="border-top: 1px solid black; font-size:10px; padding:0; margin:0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Barang</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-right">Harga Satuan</th>
+                        <th class="text-right">Discount (%)</th>
+                        <th class="text-right">Harga Total</th>
+                    </tr>
+               </thead>
+               <tbody class="sale_tbody">
+                    
+                    <t t-set="nomor" t-value="1"/>
+                    <tr t-foreach="o.order_line" t-as="l">
+                        <td>
+                            <t t-esc="nomor"/>
+                            <t t-set="nomor" t-value="nomor + 1"/>
+                        </td>
+                        <td>
+                           <span t-field="l.name"/>
+                        </td>
+                        <td class="text-center">
+                            <span t-field="l.product_uom_qty"/>
+                            
+                            <span groups="product.group_uom" t-field="l.product_uom"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="l.price_unit"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="l.discount"/>
+                        </td>
+                        
+                        <td class="text-right">
+                            <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.pricelist_id.currency_id&quot;}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table border-black table-condensed" style="border-top: 1px solid black; font-size:10px; padding:0; margin:0">
+                <tr>
+                    <td class="text-right" width="300px">
+
+
+                        <t t-set="total_qty" t-value="0"/>
+                        <t t-foreach="o.order_line" t-as="l">
+                            <t t-set="total_qty" t-value="total_qty + l.product_uom_qty"/>
+                        </t>
+                        Total Quantity : <t t-esc="total_qty"/>
+
+
+
+                    </td>
+                    <td class="text-right">
+                        <strong>Total</strong><br/>
+                        Potongan<br/>
+                        <strong>Grand Total</strong>
+                    </td>
+                    <td >
+                    </td>
+                    <td class="text-left" width="50px">
+                        <span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/><br/>
+                        <span t-field="o.amount_tax" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/><br/>
+                        <span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+                    </td>
+                </tr>
+            </table>
+
+            <table width="100%" style="font-size:10px; padding:0; margin:0">
+                <tr>
+                    <td class="text-left" width="100px">
+                        (PENERIMA)
+                    </td>
+                    <td class="text-left" width="100px">
+                        (FINANCE)
+                    </td>
+                    <td width="300px"></td>
+                </tr>
+            </table>
+
+            <div class="oe_structure"/>
+        </div>
+    </t>
+
+</template>
+
+<template id="report_saleorder">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'sale.report_saleorder_document')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

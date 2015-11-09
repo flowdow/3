@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_sale_receipt">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <div class="page">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <h2 t-esc="o.user_id.company_id.name"/>
+                        <div t-field="o.partner_id"
+                            t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'/>
+                        User: <span t-field="o.user_id"/><br/>
+                        Date: <span t-field="o.date_order"/><br/>
+                    </div>
+                </div>
+
+                <div class="row">
+                </div>
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Nama Barang</th>
+                            <th class="text-right">Qty</th>
+                            <th class="text-right">Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr t-foreach="o.order_line" t-as="line">
+                            <td><span t-field="line.name"/></td>
+                            <td class="text-right">
+                                <span t-field="line.product_uom_qty"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="line.price_unit"/>
+                                <t t-if="line.discount != 0.0">
+                                    <span t-field="line.discount"/>%
+                                </t>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-condensed pull-right">
+                    <tr class="border-black">
+                        <td><strong>Potongan</strong></td>
+                        <td class="text-right">
+                            <span t-field="o.amount_discounted"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td class="text-right">
+                            <span t-field="o.amount_total"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </t>
+</template>
+
+</data>
+</openerp>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<t t-name="report.external_layout_header">
+    <div class="header">
+<p style="font-size:10px; padding:0; margin:0"> Tanggal cetak : <span t-esc="time.strftime('%d/%m/%Y %H:%M:%S')" /></p>
+        <table class="table border-black table-condensed" style="font-size:17px; padding:0; margin:0">
+                <tr>
+                    <td style="vertical-align:middle; font-size:30px;">
+                        
+                        <center>
+                            <div t-field="company.partner_id"/>
+                        </center>
+                        
+                    </td>
+                    <td style="vertical-align:middle" > 
+                        <center>
+                            <span t-field="company.partner_id.street" style="margin:0; padding:0"/><br/>
+                            <span t-field="company.partner_id.city" style="margin:0; padding:0"/><br/>  
+                            
+                            Telp. <span t-field="company.partner_id.phone" style="margin:0; padding:0"/> , 
+                            Fax. <span t-field="company.partner_id.fax" style="margin:0; padding:0"/>
+                        </center>
+                    </td>
+                </tr>
+
+            </table>  
+    </div>
+</t>

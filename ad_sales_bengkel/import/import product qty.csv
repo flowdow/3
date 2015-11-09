@@ -1,0 +1,2 @@
+name,location_dest_id/id,product_id/id,product_uom_qty,location_id/id,product_uom/id
+INV:test1,stock.stock_location_stock,__export__.product_template_9,4,stock.location_inventory,product.product_uom_unit

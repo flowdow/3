@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		
+		<!--
+		<report 
+            id="report_sale_order"
+            string="Quotation / Order"
+            model="sale.order" 
+            report_type="qweb-pdf"
+            file="sale.report_saleorder" 
+            name="sale.report_saleorder" 
+        />
+		
+		<report
+            id="account_invoices"
+            model="account.invoice"
+            string="Invoices"
+            report_type="qweb-pdf"
+            name="account.report_invoice"
+            file="account.report_invoice"
+            attachment_use="True"
+            attachment="(object.state in ('open','paid')) and
+                ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        />
+
+    
+
+		<report 
+            id="as_sales_bengkel_report_bulanan"
+            string="Report Penjualan Bulanan"
+            model="sale.order" 
+            report_type="qweb-pdf"
+            file="ad_sales_bengkel.report_bulanan" 
+            name="ad_sales_bengkel.report_bulanan" 
+        />
+
+    -->
+
+        <report 
+            id="ad_sales_bengkel_sale_receipt"
+            string="Sales Receipt"
+            model="sale.order" 
+            report_type="qweb-pdf"
+            file="ad_sales_bengkel.report_sale_receipt" 
+            name="ad_sales_bengkel.report_sale_receipt" 
+        />
+
+<!--
+        <?xml version="1.0" encoding="ISO-8859-1"?>
+            <lots>
+                <lot-line type="fields" name="id">
+                    <code type="field" name="code"/>
+                    <product type="field" name="name"/>
+                    <variant type="field" name="attribute_value_ids.name"/>
+                    <price type="field" name="list_price"/>
+                    <ean13 type="field" name="ean13"/>
+                    <currency type="field" name="company_id.currency_id.name"/>
+                </lot-line>
+            </lots>
+-->
+
+	</data>
+</openerp>
